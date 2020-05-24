@@ -741,9 +741,9 @@ function iHeartYou(){
 	var vtext = document.getElementById("valentines_text");
 	vtext.style.display = "block";
 	if(window.location.hash){
-		vtext.textContent = encryptString(decodeURIComponent(window.location.hash).substring(1));
+		vtext.textContent = encryptString(decodeURIComponent(window.location.hash).substring(4));
 	}else{
-		vtext.textContent = "a lovely message from me to you <3";
+		vtext.textContent = "Insert Personalized Message Here";
 	}
 
 	setTimeout(function(){
@@ -802,16 +802,19 @@ function decryptString(string){
 }
 
 var yourMessage = document.getElementById("your_message");
+var yourThree = document.getElementById("your_three");
 var yourLink = document.getElementById("your_link");
 function linkChangey(){
 	if(yourMessage.value==""){
-		yourLink.value = "http://ncase.me/door/";
+		yourLink.value = "https://dansun123.github.io/door-message/";
 	}else{
-		yourLink.value = "http://ncase.me/door/#"+encodeURIComponent(encryptString(yourMessage.value));
+		yourLink.value = "https://dansun123.github.io/door-message/#"+encodeURIComponent(encryptString(yourThree.value+yourMessage.value));
 	}
 };
 yourMessage.onchange = linkChangey;
 yourMessage.oninput = linkChangey;
+yourThree.onchange = linkChangey;
+yourThree.oninput = linkChangey;
 linkChangey();
 yourLink.onclick = function(){
 	yourLink.select();
@@ -890,10 +893,45 @@ window.INTRO_LEVEL = {
 
 };
 
-window.LEVEL_CONFIG = [
-
-	// I
-	{
+circles_D = [{x:150,y:150,radius:60}]
+for(var i =60; i<=240; i+=2) {
+	circles_D.push({x:95,y:i,radius:8})
+}
+letters_to_levels ={
+ 	"A":{},
+	"B":{
+		canvas:document.getElementById("canvas_2"),
+		player:{ x:100, y:151 },
+		door:{ x:100, y:149 },
+		key:{ x:150, y:150 },
+		circles: [
+			{x:150,y:95,radius:50},
+			{x:150,y:205,radius:50},
+			{x:115,y:65,radius:15, invisible:true},
+			{x:115,y:235,radius:15, invisible:true},
+			{x:130,y:150,radius:15}
+		],
+		countdown:135
+	},
+	"D":{
+		canvas:document.getElementById("canvas_3"),
+		player:{ x:50, y:151 },
+		door:{ x:50, y:149 },
+		key:{ x:220, y:150 },
+		circles: circles_D,
+		countdown:115
+	},
+	"H":{
+		canvas:document.getElementById("canvas_1"),
+		player:{ x:70, y:50 },
+		door:{ x:230, y:270 },
+		key:{ x:70, y:270 },
+		circles: [
+			{x:150,y:240,radius:70},
+		],
+		countdown:130
+	},
+	"I":{
 		canvas:document.getElementById("canvas_1"),
 		player:{ x:150, y:175 },
 		door:{ x:150, y:75 },
@@ -902,28 +940,22 @@ window.LEVEL_CONFIG = [
 			{x:0,y:150,radius:100},
 			{x:300,y:150,radius:100}
 		],
-		countdown:90
+		countdown:80
 	},
-
-	// M
-	{
+	"M":{
 		canvas:document.getElementById("canvas_2"),
-		player:{ x:150, y:250 },
-		door:{ x:150, y:249 },
+		player:{ x:30, y:250 },
+		door:{ x:270, y:249 },
 		key:{ x:150, y:75 },
 		circles: [
 			{x:100,y:100,radius:50},
 			{x:200,y:100,radius:50},
 			{x:150,y:100,radius:10,invisible:true},
-			{x:0,y:300,radius:145},
-			{x:300,y:300,radius:145}
 		],
 		// SUPER HACK - for level 2, change timer so it's impossible to beat if you go BACKWARDS.
-		countdown: 200
+		countdown: 150
 	},
-
-	// Y
-	{
+	"U":{
 		canvas:document.getElementById("canvas_3"),
 		player:{ x:30, y:75 },
 		door:{ x:270, y:75 },
@@ -931,8 +963,30 @@ window.LEVEL_CONFIG = [
 		circles: [
 			{x:150,y:150,radius:115}
 		],
-		countdown: 130
-	}
+		countdown: 120
+	},
+}
+
+// letters_to_levels["H"].canvas = document.getElementById("canvas_2"),
+// letters_to_levels["B"].canvas = document.getElementById("canvas_3"),
+// letters_to_levels["D"].canvas = document.getElementById("canvas_1")
+window.LEVEL_CONFIG = [
+	letters_to_levels["H"],
+	letters_to_levels["B"],
+	letters_to_levels["D"],
 
 ];
+
+if(window.location.hash){
+	letters_to_levels[encryptString(decodeURIComponent(window.location.hash).substring(1)).charAt(0).toUpperCase()].canvas = document.getElementById("canvas_1")
+	letters_to_levels[encryptString(decodeURIComponent(window.location.hash).substring(1)).charAt(1).toUpperCase()].canvas = document.getElementById("canvas_2")
+	letters_to_levels[encryptString(decodeURIComponent(window.location.hash).substring(1)).charAt(2).toUpperCase()].canvas = document.getElementById("canvas_3")
+	window.LEVEL_CONFIG = [
+
+		letters_to_levels[encryptString(decodeURIComponent(window.location.hash).substring(1)).charAt(0).toUpperCase()],
+		letters_to_levels[encryptString(decodeURIComponent(window.location.hash).substring(1)).charAt(1).toUpperCase()],
+		letters_to_levels[encryptString(decodeURIComponent(window.location.hash).substring(1)).charAt(2).toUpperCase()]
+	
+	];
+}
 
