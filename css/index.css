@@ -126,13 +126,13 @@ input#your_message{
 input#your_three{
 	display: block;
 	width: 100%;
-	font-size: 15px;
+	font-size: 30px;
 	padding: 5px;
-	background: #ddd;
-	border:none;
+	border: 2px solid #ddd;
 	margin: 5px 0 40px 0;
 
 	color: #666;
+	padding-top: 8px;
 
 	font-family: Helvetica, Arial, sans-serif;
 	font-weight: 100;

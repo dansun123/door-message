@@ -942,6 +942,17 @@ letters_to_levels ={
 		],
 		countdown:80
 	},
+	"L":{
+		canvas:document.getElementById("canvas_2"),
+		player:{ x:70, y:70 },
+		door:{ x:230, y:250 },
+		key:{ x:70, y:250 },
+		circles: [
+			{x:70,y:300,radius:40,invisible:true},
+		],
+		// SUPER HACK - for level 2, change timer so it's impossible to beat if you go BACKWARDS.
+		countdown: 80
+	},
 	"M":{
 		canvas:document.getElementById("canvas_2"),
 		player:{ x:30, y:250 },
@@ -955,6 +966,17 @@ letters_to_levels ={
 		// SUPER HACK - for level 2, change timer so it's impossible to beat if you go BACKWARDS.
 		countdown: 150
 	},
+	"O":{
+		canvas:document.getElementById("canvas_2"),
+		player:{ x:50, y:151 },
+		door:{ x:50, y:149 },
+		key:{ x:250, y:150 },
+		circles: [
+			{x:150,y:150,radius:80}
+		],
+		// SUPER HACK - for level 2, change timer so it's impossible to beat if you go BACKWARDS.
+		countdown: 110
+	},
 	"U":{
 		canvas:document.getElementById("canvas_3"),
 		player:{ x:30, y:75 },
@@ -967,26 +989,25 @@ letters_to_levels ={
 	},
 }
 
-// letters_to_levels["H"].canvas = document.getElementById("canvas_2"),
-// letters_to_levels["B"].canvas = document.getElementById("canvas_3"),
-// letters_to_levels["D"].canvas = document.getElementById("canvas_1")
+let one = JSON.parse(JSON.stringify(letters_to_levels["L"]))
+one.canvas = document.getElementById("canvas_1")
+let two = JSON.parse(JSON.stringify(letters_to_levels["O"]))
+two.canvas = document.getElementById("canvas_2")
+let three = JSON.parse(JSON.stringify(letters_to_levels["L"]))
+three.canvas = document.getElementById("canvas_3")
 window.LEVEL_CONFIG = [
-	letters_to_levels["H"],
-	letters_to_levels["B"],
-	letters_to_levels["D"],
-
+	one, two, three
 ];
 
 if(window.location.hash){
 	letters_to_levels[encryptString(decodeURIComponent(window.location.hash).substring(1)).charAt(0).toUpperCase()].canvas = document.getElementById("canvas_1")
+	one = JSON.parse(JSON.stringify(letters_to_levels[encryptString(decodeURIComponent(window.location.hash).substring(1)).charAt(0).toUpperCase()]));
 	letters_to_levels[encryptString(decodeURIComponent(window.location.hash).substring(1)).charAt(1).toUpperCase()].canvas = document.getElementById("canvas_2")
+	two = JSON.parse(JSON.stringify(letters_to_levels[encryptString(decodeURIComponent(window.location.hash).substring(1)).charAt(1).toUpperCase()]));
 	letters_to_levels[encryptString(decodeURIComponent(window.location.hash).substring(1)).charAt(2).toUpperCase()].canvas = document.getElementById("canvas_3")
+	three = JSON.parse(JSON.stringify(letters_to_levels[encryptString(decodeURIComponent(window.location.hash).substring(1)).charAt(2).toUpperCase()]));
 	window.LEVEL_CONFIG = [
-
-		letters_to_levels[encryptString(decodeURIComponent(window.location.hash).substring(1)).charAt(0).toUpperCase()],
-		letters_to_levels[encryptString(decodeURIComponent(window.location.hash).substring(1)).charAt(1).toUpperCase()],
-		letters_to_levels[encryptString(decodeURIComponent(window.location.hash).substring(1)).charAt(2).toUpperCase()]
-	
+		one, two, three
 	];
 }
 
