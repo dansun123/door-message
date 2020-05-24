@@ -1000,12 +1000,12 @@ window.LEVEL_CONFIG = [
 ];
 
 if(window.location.hash){
-	letters_to_levels[encryptString(decodeURIComponent(window.location.hash).substring(1)).charAt(0).toUpperCase()].canvas = document.getElementById("canvas_1")
 	one = JSON.parse(JSON.stringify(letters_to_levels[encryptString(decodeURIComponent(window.location.hash).substring(1)).charAt(0).toUpperCase()]));
-	letters_to_levels[encryptString(decodeURIComponent(window.location.hash).substring(1)).charAt(1).toUpperCase()].canvas = document.getElementById("canvas_2")
 	two = JSON.parse(JSON.stringify(letters_to_levels[encryptString(decodeURIComponent(window.location.hash).substring(1)).charAt(1).toUpperCase()]));
-	letters_to_levels[encryptString(decodeURIComponent(window.location.hash).substring(1)).charAt(2).toUpperCase()].canvas = document.getElementById("canvas_3")
 	three = JSON.parse(JSON.stringify(letters_to_levels[encryptString(decodeURIComponent(window.location.hash).substring(1)).charAt(2).toUpperCase()]));
+	one.canvas = document.getElementById("canvas_1")
+	two.canvas = document.getElementById("canvas_2")
+	three.canvas = document.getElementById("canvas_3")
 	window.LEVEL_CONFIG = [
 		one, two, three
 	];
