@@ -905,7 +905,7 @@ window.LEVEL_CONFIG = [
 		countdown:90
 	},
 
-	// HEART
+	// M
 	{
 		canvas:document.getElementById("canvas_2"),
 		player:{ x:150, y:250 },
@@ -922,7 +922,7 @@ window.LEVEL_CONFIG = [
 		countdown: 200
 	},
 
-	// U
+	// Y
 	{
 		canvas:document.getElementById("canvas_3"),
 		player:{ x:30, y:75 },
