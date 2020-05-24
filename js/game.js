@@ -893,9 +893,9 @@ window.INTRO_LEVEL = {
 
 };
 
-circles_D = [{x:150,y:150,radius:60}]
+circles_D = []
 for(var i =60; i<=240; i+=2) {
-	circles_D.push({x:95,y:i,radius:8})
+	circles_D.push({x:95,y:i,radius:15})
 }
 letters_to_levels ={
  	"A":{},
