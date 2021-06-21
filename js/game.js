@@ -993,8 +993,9 @@ letters_to_levels = {
 		door: { x: 270, y: 75 },
 		key: { x: 150, y: 270 },
 		circles: [
-			{ x: 50, y: 150, radius: 75 },
-			{ x: 250, y: 150, radius: 75 }
+			{ x: 50, y: 200, radius: 90 },
+			{ x: 250, y: 200, radius: 90 },
+			{ x: 150, y: 50, radius: 70 }
 		],
 		countdown: 120
 	},
